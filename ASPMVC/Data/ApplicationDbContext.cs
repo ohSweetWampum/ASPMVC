@@ -23,7 +23,7 @@ namespace ASPMVC.Data
                 );
         }
 
-        //DbContextOptions is a built in class, it is of generic type (<>)    ApplicationDbContext   
+        //DbContdddextOptions is a built in class, it is of generic type (<>)    ApplicationDbContext   
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
 
