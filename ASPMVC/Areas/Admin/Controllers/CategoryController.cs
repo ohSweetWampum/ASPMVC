@@ -1,20 +1,22 @@
 ﻿using System;
 using ASPMVC.Data;
+using ASPMVC.DataAccess.Repository.IRepository;
 using ASPMVC.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ASPMVC.Controllers
+namespace ASPMVC.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CategoryController : Controller
     {
-        private readonly ApplicationDbContext _db;
-        public CategoryController(ApplicationDbContext db)
+        private readonly IUnitOfWork _unitOfWork;
+        public CategoryController(IUnitOfWork unitOfWork)
         {
-            _db = db;
+            _unitOfWork = unitOfWork;
         }
         public IActionResult Index()
         {
-            List<Category> objCategoryList = _db.myCategoryTable.ToList();
+            List<Category> objCategoryList = _unitOfWork.Category.GetAll().ToList();
             return View(objCategoryList);
         }
         public IActionResult Create()
@@ -30,8 +32,8 @@ namespace ASPMVC.Controllers
             }
             if (ModelState.IsValid)
             {
-                _db.myCategoryTable.Add(obj);
-                _db.SaveChanges();
+                _unitOfWork.Category.Add(obj);
+                _unitOfWork.Save();
                 TempData["success"] = "Category created successfully";
                 return RedirectToAction("Index");
             }
@@ -44,7 +46,7 @@ namespace ASPMVC.Controllers
             {
                 return NotFound();
             }
-            Category? categoryFromDb = _db.myCategoryTable.Find(id);
+            Category? categoryFromDb = _unitOfWork.Category.Get(u => u.Id == id);
             //Category? categoryFromDb1 = _db.myCategoryTable.FirstOrDefault(u => u.Id == id);
             //Category? categoryFromDb2 = _db.myCategoryTable.Where(u => u.Id == id).FirstOrDefault();
 
@@ -64,8 +66,8 @@ namespace ASPMVC.Controllers
 
             if (ModelState.IsValid)
             {
-                _db.myCategoryTable.Update(obj);
-                _db.SaveChanges();
+                _unitOfWork.Category.Update(obj);
+                _unitOfWork.Save();
                 TempData["success"] = "Category created successfully";
                 return RedirectToAction("Index");
             }
@@ -78,7 +80,7 @@ namespace ASPMVC.Controllers
             {
                 return NotFound();
             }
-            Category? categoryFromDb = _db.myCategoryTable.Find(id);
+            Category? categoryFromDb = _unitOfWork.Category.Get(u => u.Id == id);
             //Category? categoryFromDb1 = _db.Categories.FirstOrDefault(u=>u.Id==id);
             //Category? categoryFromDb2 = _db.Categories.Where(u=>u.Id==id).FirstOrDefault();
 
@@ -91,13 +93,13 @@ namespace ASPMVC.Controllers
         [HttpPost, ActionName("Delete")]
         public IActionResult DeletePOST(int? id)
         {
-            Category? obj = _db.myCategoryTable.Find(id);
+            Category? obj = _unitOfWork.Category.Get(u => u.Id == id);
             if (obj == null)
             {
                 return NotFound();
             }
-            _db.myCategoryTable.Remove(obj);
-            _db.SaveChanges();
+            _unitOfWork.Category.Remove(obj);
+            _unitOfWork.Save();
             TempData["success"] = "Category created successfully";
             return RedirectToAction("Index");
         }
