@@ -47,8 +47,7 @@ namespace ASPMVC.Areas.Admin.Controllers
                 return NotFound();
             }
             Category? categoryFromDb = _unitOfWork.Category.Get(u => u.Id == id);
-            //Category? categoryFromDb1 = _db.myCategoryTable.FirstOrDefault(u => u.Id == id);
-            //Category? categoryFromDb2 = _db.myCategoryTable.Where(u => u.Id == id).FirstOrDefault();
+       
 
             if (categoryFromDb == null)
             {
@@ -81,8 +80,7 @@ namespace ASPMVC.Areas.Admin.Controllers
                 return NotFound();
             }
             Category? categoryFromDb = _unitOfWork.Category.Get(u => u.Id == id);
-            //Category? categoryFromDb1 = _db.Categories.FirstOrDefault(u=>u.Id==id);
-            //Category? categoryFromDb2 = _db.Categories.Where(u=>u.Id==id).FirstOrDefault();
+         
 
             if (categoryFromDb == null)
             {

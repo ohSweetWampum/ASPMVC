@@ -35,6 +35,7 @@
     <None Remove="Controllers\" />
     <None Remove="Areas\Admin\Views\Category\" />
     <None Remove="Areas\Customer\Views\Home\" />
+    <None Remove="Areas\Admin\Views\Product\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\" />
@@ -47,6 +48,7 @@
     <Folder Include="Controllers\" />
     <Folder Include="Areas\Admin\Views\Category\" />
     <Folder Include="Areas\Customer\Views\Home\" />
+    <Folder Include="Areas\Admin\Views\Product\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ASPMVC.Models\ASPMVC.Models.csproj">
