@@ -1,4 +1,9 @@
-﻿@if (TempData["success"] != null)
+﻿@*This code checks if there is a "success" message stored in the TempData dictionary.
+    If such a message exists, it includes the jQuery and Toastr library scripts and then displays a
+    success notification using Toastr. The message is retrieved from TempData["success"].*@
+
+
+@if (TempData["success"] != null)
 {
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
@@ -7,10 +12,32 @@
     </script>
 }
 @if (TempData["error"] != null)
-    {
+{
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script type="text/javascript">
         toastr.error('@TempData["success"]');
     </script>
-    }
+}
+
+
+@*Toastr is a JavaScript library for displaying non-blocking notifications or toast messages to the user.
+    It provides a visually appealing way to show success, warning, error, or informational messages on a
+    web page.*@
+
+
+
+
+@*TempData is a feature in ASP.NET Core that allows you to store data temporarily and pass it from one action
+        method to another, typically during an HTTP redirect. It is often used for scenarios where you need to
+        display a message or data to the user on the next page after a redirect. Here are some key characteristics
+        of TempData:
+
+    Temporary Storage: TempData is designed to store data temporarily between two successive requests.
+        It's useful when you need to persist data from the first request (e.g., a form submission) and access
+        it in the subsequent request (e.g., after a redirect).*@
+
+
+@*In summary, _Notification.cshtml is used to display client-side notifications to users based on messages
+    stored in TempData. If there are "success" or "error" messages in TempData, it includes the necessary
+    JavaScript libraries and uses Toastr to show these messages as notifications to the user.*@

@@ -37,7 +37,12 @@ namespace ASPMVC.Data
         public DbSet<Category> myCategoryTable { get; set; }
 
         public DbSet<Product> myProductTable { get; set; }
-
+        //OnModelCreating is a method provided by Entity Framework that allows you to define the database model
+        //and configure various aspects of the database schema. It's typically used in a class that inherits
+        //from DbContext and is overridden to provide custom configuration for your database context.
+        //HasData is a method provided by ModelBuilder that is used to specify initial data to be inserted
+        //into the database when the database schema is created or when migrations are applied.
+        //It allows you to seed the database with predefined data. 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Category>().HasData(
